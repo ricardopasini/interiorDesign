@@ -2,6 +2,7 @@ package com.interiordesign.model;
 
 import java.time.LocalDate;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -14,7 +15,11 @@ public class Project {
     private Long id;
     private String title;
     private String description;
+    
+    @Column(name = "imageurl")
     private String imageUrl;
+    
+    @Column(name = "datecreated")
     private LocalDate dateCreated;
 
     // Getters and setters

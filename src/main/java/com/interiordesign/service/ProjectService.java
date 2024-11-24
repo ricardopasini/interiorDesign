@@ -17,7 +17,24 @@ public class ProjectService {
         return projectRepository.findAll();
     }
 
-    public Project addProject(Project project) {
+    public Project getProjectById(Long id) {
+        return projectRepository.findById(id).orElseThrow(() -> new RuntimeException("Project not found"));
+    }
+
+    public Project createProject(Project project) {
+        project.setDateCreated(java.time.LocalDate.now());
         return projectRepository.save(project);
+    }
+
+    public Project updateProject(Long id, Project updatedProject) {
+        Project existingProject = getProjectById(id);
+        existingProject.setTitle(updatedProject.getTitle());
+        existingProject.setDescription(updatedProject.getDescription());
+        existingProject.setImageUrl(updatedProject.getImageUrl());
+        return projectRepository.save(existingProject);
+    }
+
+    public void deleteProject(Long id) {
+        projectRepository.deleteById(id);
     }
 }
